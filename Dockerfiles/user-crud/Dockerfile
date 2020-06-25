@@ -9,7 +9,7 @@ RUN yarn global add typescript
 RUN yarn install
 
 # Copy project files
-COPY src src/
+COPY . .
 
 # Compile TS -> JS
 RUN yarn build
