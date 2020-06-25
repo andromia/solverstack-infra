@@ -1,4 +1,4 @@
-FROM keymetrics/pm2:14-alpine
+FROM node:14-alpine3.10
 
 # Copy dependencies & config files
 COPY package.json .
@@ -19,4 +19,4 @@ ENV PORT 8081
 EXPOSE 8081
 
 # Start PM2 Process
-CMD ["pm2-runtime", "src/server.js"]
+CMD ["yarn", "deploy"]
