@@ -5,7 +5,8 @@ COPY package.json .
 COPY yarn.lock .
 
 # Install app dependencies
-RUN yarn install --production
+RUN yarn global add typescript
+RUN yarn install
 
 # Copy project files
 COPY src src/
