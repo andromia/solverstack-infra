@@ -1,0 +1,32 @@
+version: "3"
+networks:
+  isolation-network:
+    driver: bridge
+
+services:
+  react_nextjs:
+    image: react_nextjs:1.00
+    container_name: react_nextjs
+    ports:
+      - "80:3000"
+    build:
+      context: ./Dockerfiles/client
+    depends_on:
+      - node_auth
+      - node_crud
+    networks:
+      - isolation-network
+  node_auth:
+    image: node_auth:1.00
+    container_name: node_auth
+    build:
+      context: ./Dockerfiles/user-auth
+    networks:
+      - isolation-network
+  node_crud:
+    image: node_crud:1.00
+    container_name: node_crud
+    build:
+      context: ./Dockerfiles/user-crud
+    networks:
+      - isolation-network
