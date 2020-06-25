@@ -21,6 +21,8 @@ services:
     container_name: node_auth
     build:
       context: ./Dockerfiles/user-auth
+    ports:
+      - "8080:8080"
     networks:
       - isolation-network
   node_crud:
@@ -28,5 +30,7 @@ services:
     container_name: node_crud
     build:
       context: ./Dockerfiles/user-crud
+    ports:
+      - "8081:8081"
     networks:
       - isolation-network
