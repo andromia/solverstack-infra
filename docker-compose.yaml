@@ -7,30 +7,55 @@ services:
   react_nextjs:
     image: react_nextjs:1.00
     container_name: react_nextjs
+    restart: always
     ports:
       - "80:80"
     build:
       context: ./Dockerfiles/client
     depends_on:
-      - node_auth
-      - node_crud
+      - node_user_auth
+      - node_user_crud
     networks:
       - isolation-network
-  node_auth:
-    image: node_auth:1.00
-    container_name: node_auth
+
+  node_user_auth:
+    image: node_user_auth:1.00
+    container_name: node_user_auth
+    restart: always
     build:
       context: ./Dockerfiles/user-auth
     ports:
       - "8080:8080"
+    links:
+      - mongo
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - mongo
     networks:
       - isolation-network
-  node_crud:
-    image: node_crud:1.00
-    container_name: node_crud
+
+  node_user_crud:
+    image: node_user_crud:1.00
+    container_name: node_user_crud
+    restart: always
     build:
       context: ./Dockerfiles/user-crud
     ports:
       - "8081:8081"
+    links:
+      - mongo
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - mongo
+    networks:
+      - isolation-network
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
     networks:
       - isolation-network
