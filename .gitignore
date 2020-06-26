@@ -6,9 +6,3 @@ Dockerfiles/user-crud/*
 
 .vagrant/
 .env
-
-# service repos
-cvrp-client/
-cvrp-user-auth/
-cvrp-user-crud/
-cvrp-app/
