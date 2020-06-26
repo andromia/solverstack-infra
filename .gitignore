@@ -3,3 +3,12 @@ Dockerfiles/user-auth/*
 Dockerfiles/user-crud/*
 
 !Dockerfile
+
+.vagrant/
+.env
+
+# service repos
+cvrp-client/
+cvrp-user-auth/
+cvrp-user-crud/
+cvrp-app/
