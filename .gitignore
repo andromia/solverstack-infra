@@ -3,6 +3,7 @@ Dockerfiles/user-auth/*
 Dockerfiles/user-crud/*
 
 !Dockerfile
+!.dockerignore
 
 .vagrant/
 .env
