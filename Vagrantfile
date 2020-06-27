@@ -1,12 +1,17 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+
+VAGRANT_BOX = "bento/ubuntu-20.04"
+ALLOCATED_MEMORY = "512"
+
 Vagrant.configure(2) do |config|
+  
     config.vm.provider "virtualbox" do |vb|
-      vb.memory = "512"
+      vb.memory = ALLOCATED_MEMORY
     end
   
-    config.vm.box = "bento/ubuntu-20.04"
+    config.vm.box = VAGRANT_BOX
     
     # Install Docker
     config.vm.provision :docker
