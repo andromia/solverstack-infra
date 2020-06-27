@@ -10,7 +10,7 @@ sh setup.sh
 ### Start Docker
 Run the following command to intialize the docker compose process
 ```
-docker-compose up --build
+docker-compose up
 ```
 
 ### Stop Docker
