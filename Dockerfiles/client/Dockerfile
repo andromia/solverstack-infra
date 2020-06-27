@@ -10,7 +10,7 @@ ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
 # Copy over dependencies & install
 COPY package.json /usr/src/app/package.json
-RUN yarn install
+RUN yarn install --production
 
 # Copy all project files over & build
 COPY . /usr/src/app
