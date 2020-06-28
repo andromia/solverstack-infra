@@ -4,3 +4,6 @@ Dockerfiles/user-crud/*
 
 !Dockerfile
 !.dockerignore
+
+.vagrant/
+.env
