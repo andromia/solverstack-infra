@@ -1,4 +1,4 @@
-# cvrp-infra
+# mds-infra
 Infrastructure related scripts and tools
 
 ### Initial setup
