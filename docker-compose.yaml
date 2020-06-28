@@ -1,56 +1,56 @@
 version: "3"
 networks:
-  isolation-network:
-    driver: bridge
+    isolation-network:
+        driver: bridge
 
 services:
-  react_nextjs:
-    image: react_nextjs:1.00
-    container_name: react_nextjs
-    restart: unless-stopped
-    command: yarn start
-    ports:
-      - "80:80"
-    build:
-      context: ./Dockerfiles/client
-    depends_on:
-      - node_user_auth
-      - node_user_crud
-    networks:
-      - isolation-network
+    react_nextjs:
+        image: react_nextjs:1.00
+        container_name: react_nextjs
+        restart: unless-stopped
+        command: yarn start
+        ports:
+            - "80:80"
+        build:
+            context: ./Dockerfiles/client
+        depends_on:
+            - node_user_auth
+            - node_user_crud
+        networks:
+            - isolation-network
 
-  node_user_auth:
-    image: node_user_auth:1.00
-    container_name: node_user_auth
-    restart: unless-stopped
-    command: yarn deploy
-    build:
-      context: ./Dockerfiles/user-auth
-    ports:
-      - "8080:8080"
-    depends_on:
-      - mongo
-    networks:
-      - isolation-network
+    node_user_auth:
+        image: node_user_auth:1.00
+        container_name: node_user_auth
+        restart: unless-stopped
+        command: yarn deploy
+        build:
+            context: ./Dockerfiles/user-auth
+        ports:
+            - "8080:8080"
+        depends_on:
+            - mongo
+        networks:
+            - isolation-network
 
-  node_user_crud:
-    image: node_user_crud:1.00
-    container_name: node_user_crud
-    restart: unless-stopped
-    command: yarn deploy
-    build:
-      context: ./Dockerfiles/user-crud
-    ports:
-      - "8081:8081"
-    depends_on:
-      - mongo
-    networks:
-      - isolation-network
+    node_user_crud:
+        image: node_user_crud:1.00
+        container_name: node_user_crud
+        restart: unless-stopped
+        command: yarn deploy
+        build:
+            context: ./Dockerfiles/user-crud
+        ports:
+            - "8081:8081"
+        depends_on:
+            - mongo
+        networks:
+            - isolation-network
 
-  mongo:
-    image: mongo
-    restart: unless-stopped
-    ports:
-      - "27017:27017"
-    networks:
-      - isolation-network
+    mongo:
+        image: mongo
+        restart: unless-stopped
+        ports:
+            - "27017:27017"
+        networks:
+            - isolation-network
