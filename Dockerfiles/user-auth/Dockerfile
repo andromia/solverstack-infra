@@ -17,6 +17,3 @@ RUN yarn build
 # Set and expose port
 ENV PORT 8080
 EXPOSE 8080
-
-# Start PM2 Process
-CMD ["yarn", "deploy"]

@@ -1,5 +1,6 @@
 # Node dependencies
 node_modules/
+npm-debug.log
 
 # Git
 .git
@@ -18,3 +19,8 @@ docker*
 .eslintrc
 README.md
 cypress*
+Dockerfile*
+docker-compose*
+.dockerignore
+LICENSE
+.vscode
