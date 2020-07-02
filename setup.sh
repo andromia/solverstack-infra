@@ -15,19 +15,19 @@ mv Dockerfile .dockerignore user-crud/
 
 # Clone Microservices
 cd client/
-git clone git@github.com:andromia/cvrp-client.git
+git clone git@github.com:andromia/mds-client.git
 cp -r cvrp-client/* .
 rm -rf cvrp-client
 cd ..
 
 cd user-auth/
-git clone git@github.com:andromia/cvrp-user-auth.git
+git clone git@github.com:andromia/mds-user-auth.git
 cp -r cvrp-user-auth/* .
 rm -rf cvrp-user-auth
 cd ..
 
 cd user-crud/
-git clone git@github.com:andromia/cvrp-user-crud.git
+git clone git@github.com:andromia/mds-user-crud.git
 cp -r cvrp-user-crud/* .
 rm -rf cvrp-user-crud
 cd ..
