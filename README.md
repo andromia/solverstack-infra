@@ -1,4 +1,4 @@
-# mds-infra
+# solverstack-infra
 Infrastructure related scripts and tools
 
 ### Initial setup
