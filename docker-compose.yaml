@@ -11,6 +11,7 @@ services:
         command: yarn build                         # TODO: yarn start
         ports:
             - "80:80"
+            - "3000:3000"
         build:
             context: ./Dockerfiles/web-client
         depends_on:
