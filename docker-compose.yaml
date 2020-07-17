@@ -8,14 +8,15 @@ services:
         image: react_nextjs:1.00
         container_name: react_nextjs
         restart: unless-stopped
-        command: yarn start
+        command: yarn build                         # TODO: yarn start
         ports:
             - "80:80"
         build:
-            context: ./Dockerfiles/client
+            context: ./Dockerfiles/web-client
         depends_on:
             - node_user_auth
             - node_user_crud
+            - flask_vrp_rpc
         networks:
             - isolation-network
 
@@ -23,7 +24,7 @@ services:
         image: node_user_auth:1.00
         container_name: node_user_auth
         restart: unless-stopped
-        command: yarn deploy
+        command: yarn build                         # yarn deploy
         build:
             context: ./Dockerfiles/user-auth
         ports:
@@ -37,7 +38,7 @@ services:
         image: node_user_crud:1.00
         container_name: node_user_crud
         restart: unless-stopped
-        command: yarn deploy
+        command: yarn build                         # yarn deploy
         build:
             context: ./Dockerfiles/user-crud
         ports:
@@ -52,5 +53,17 @@ services:
         restart: unless-stopped
         ports:
             - "27017:27017"
+        networks:
+            - isolation-network
+    
+    flask_vrp_rpc:
+        image: flask_vrp_rpc:1.00
+        container_name: flask_vrp_rpc
+        restart: unless-stopped
+        command: manage.py runserver --host=0.0.0.0  # TODO: replace dev flask server
+        build: 
+            context: ./Dockerfiles/vrp-rpc
+        ports:
+            - "5000:5000"
         networks:
             - isolation-network

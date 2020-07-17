@@ -1,6 +1,7 @@
-Dockerfiles/client/*
+Dockerfiles/web-client/*
 Dockerfiles/user-auth/*
 Dockerfiles/user-crud/*
+Dockerfiles/vrp-rpc/*
 
 !Dockerfile
 !.dockerignore

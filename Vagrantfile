@@ -2,16 +2,26 @@
 # vi: set ft=ruby :
 
 
-VAGRANT_BOX = "bento/ubuntu-20.04"
-ALLOCATED_MEMORY = "512"
+# if on windows host without admin rights, warn & exit
+if Vagrant::Util::Platform.windows? then
+  def running_in_admin_mode?
+    (`reg query HKU\\S-1-5-19 2>&1` =~ /ERROR/).nil?
+  end
+ 
+  unless running_in_admin_mode?
+    puts "This vagrant makes use of SymLinks to the host. On Windows, Administrative privileges are required to create symlinks (mklink.exe). Try again from an Administrative command prompt."
+    exit 1
+  end
+end
 
 Vagrant.configure(2) do |config|
   
     config.vm.provider "virtualbox" do |vb|
-      vb.memory = ALLOCATED_MEMORY
+      vb.memory = "512"
+      vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
     end
   
-    config.vm.box = VAGRANT_BOX
+    config.vm.box = "bento/ubuntu-20.04"
     
     # Install Docker
     config.vm.provision :docker
@@ -22,14 +32,23 @@ Vagrant.configure(2) do |config|
     config.vm.provision :docker_compose
 
     config.vm.network :forwarded_port, guest: 80, host: 80
+
+    # web-client
+    config.vm.network :forwarded_port, guest: 3000, host: 3000
+
+    # user-auth
     config.vm.network :forwarded_port, guest: 8080, host: 8080
+
+    # user-crud
     config.vm.network :forwarded_port, guest: 8081, host: 8081
-  
-    config.ssh.forward_agent = true
-  
-    # TODO: resolve -> Warning: Permanently added 'github.com,140.82.113.3' (RSA) to the list of known hosts.
-    # config.vm.provision "shell", inline: <<-SHELL
 
-    # SHELL
+    # vrp-rpc
+    config.vm.network :forwarded_port, guest: 5000, host: 5000
 
-    end
+    config.vm.provision "shell", inline: <<-SHELL
+      apt-get update -y
+      apt-get upgrade -y
+      apt-get dist-upgrade -y
+      apt-get install -y python3-dev python3-wheel python3-setuptools python3-six python3-pip
+    SHELL
+  end
