@@ -8,60 +8,59 @@ services:
         image: react_nextjs:1.00
         container_name: react_nextjs
         restart: unless-stopped
-        command: yarn build                         # TODO: yarn start
+        command: yarn dev                         # TODO: yarn start
         ports:
             - "80:80"
             - "3000:3000"
         build:
             context: ./Dockerfiles/web-client
         depends_on:
-            - node_user_auth
-            - node_user_crud
             - flask_vrp_rpc
         networks:
             - isolation-network
 
-    node_user_auth:
-        image: node_user_auth:1.00
-        container_name: node_user_auth
-        restart: unless-stopped
-        command: yarn build                         # yarn deploy
-        build:
-            context: ./Dockerfiles/user-auth
-        ports:
-            - "8080:8080"
-        depends_on:
-            - mongo
-        networks:
-            - isolation-network
+    #node_user_auth:
+    #    image: node_user_auth:1.00
+    #    container_name: node_user_auth
+    #    restart: unless-stopped
+    #    command: yarn build                         # yarn deploy
+    #    build:
+    #        context: ./Dockerfiles/user-auth
+    #    ports:
+    #        - "8080:8080"
+    #    depends_on:
+    #        - mongo
+    #    networks:
+    #        - isolation-network
 
-    node_user_crud:
-        image: node_user_crud:1.00
-        container_name: node_user_crud
-        restart: unless-stopped
-        command: yarn build                         # yarn deploy
-        build:
-            context: ./Dockerfiles/user-crud
-        ports:
-            - "8081:8081"
-        depends_on:
-            - mongo
-        networks:
-            - isolation-network
+    #node_user_crud:
+    #    image: node_user_crud:1.00
+    #    container_name: node_user_crud
+    #    restart: unless-stopped
+    #    command: yarn build                         # yarn deploy
+    #    build:
+    #        context: ./Dockerfiles/user-crud
+    #    ports:
+    #        - "8081:8081"
+    #    depends_on:
+    #        - mongo
+    #    networks:
+    #        - isolation-network
 
-    mongo:
-        image: mongo
-        restart: unless-stopped
-        ports:
-            - "27017:27017"
-        networks:
-            - isolation-network
+    #mongo:
+    #    image: mongo
+    #    restart: unless-stopped
+    #    ports:
+    #        - "27017:27017"
+    #    networks:
+    #        - isolation-network
     
+    # TODO: replace dev flask server
     flask_vrp_rpc:
         image: flask_vrp_rpc:1.00
         container_name: flask_vrp_rpc
         restart: unless-stopped
-        command: manage.py runserver --host=0.0.0.0  # TODO: replace dev flask server
+        command: manage.py runserver --host=0.0.0.0 
         build: 
             context: ./Dockerfiles/vrp-rpc
         ports:

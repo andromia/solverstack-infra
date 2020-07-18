@@ -44,4 +44,7 @@ Vagrant.configure(2) do |config|
 
     # vrp-rpc
     config.vm.network :forwarded_port, guest: 5000, host: 5000
+
+    # mogno 
+    config.vm.network :forwarded_port, guest: 27017, host: 27017
   end

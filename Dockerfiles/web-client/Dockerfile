@@ -8,6 +8,9 @@ WORKDIR /usr/src/app
 # Set node in path
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
+# TODO: abstract dev mock infra from prod
+ENV NODE_ENV development
+
 # Copy over dependencies & install
 COPY package.json /usr/src/app/package.json
 #RUN yarn install --production
@@ -20,5 +23,5 @@ COPY . /usr/src/app
 ENV PORT 80
 EXPOSE 80
 
-ENV PORT 3000
-EXPOSE 3000
+#ENV PORT 3000
+#EXPOSE 3000
