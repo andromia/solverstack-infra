@@ -31,20 +31,7 @@ Vagrant.configure(2) do |config|
     # vagrant plugin install vagrant-docker-compose
     config.vm.provision :docker_compose
 
-    config.vm.network :forwarded_port, guest: 80, host: 80
-
     # web-client
     config.vm.network :forwarded_port, guest: 3000, host: 3000
-
-    # user-auth
-    config.vm.network :forwarded_port, guest: 8080, host: 8080
-
-    # user-crud
-    config.vm.network :forwarded_port, guest: 8081, host: 8081
-
-    # vrp-rpc
-    config.vm.network :forwarded_port, guest: 5000, host: 5000
-
-    # mogno 
-    config.vm.network :forwarded_port, guest: 27017, host: 27017
+    
   end
