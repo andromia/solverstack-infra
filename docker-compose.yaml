@@ -14,7 +14,7 @@ services:
         build:
             context: ./Dockerfiles/web-client
         depends_on:
-            - flask_vrp_rpc
+            - flask_route
         networks:
             - isolation-network
 
@@ -54,15 +54,17 @@ services:
         networks:
             - isolation-network
     
-     TODO: replace dev flask server
-    flask_vrp_rpc:
-        image: flask_vrp_rpc:1.00
-        container_name: flask_vrp_rpc
+    # TODO: replace dev flask server
+    flask_route:
+        image: flask_route:1.00
+        container_name: flask_route
         restart: unless-stopped
-        command: manage.py runserver --host=0.0.0.0 # TODO
+        command: manage.py runserver --host=0.0.0.0
         build: 
             context: ./Dockerfiles/vrp-rpc
         ports:
             - "5000:5000"
         networks:
             - isolation-network
+
+    # TODO: add crud, postgresql, geocode, depot
