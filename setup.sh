@@ -2,8 +2,8 @@
 
 # Clean up
 cd Dockerfiles
-mv client/Dockerfile client/.dockerignore . && rm -rf client/*
-mv Dockerfile .dockerignore client/
+mv web/Dockerfile web/.dockerignore . && rm -rf web/*
+mv Dockerfile .dockerignore web/
 
 cd Dockerfiles
 mv user-auth/Dockerfile user-auth/.dockerignore . && rm -rf user-auth/*
@@ -18,10 +18,10 @@ mv route/Dockerfile route/.dockerignore . && rm -rf route/*
 mv Dockerfile .dockerignore route/
 
 # Clone Microservices
-cd client/
-git clone git@github.com:andromia/solverstack-client.git
-cp -r solverstack-client/* .
-rm -rf solverstack-client
+cd web/
+git clone git@github.com:andromia/solverstack-web.git
+cp -r solverstack-web/* .
+rm -rf solverstack-web
 cd ..
 
 cd user-auth/
