@@ -12,48 +12,12 @@ services:
         ports:
             - "80:80"
         build:
-            context: ./Dockerfiles/web-client
+            context: ./Dockerfiles/web
         depends_on:
             - flask_route
         networks:
             - isolation-network
 
-    node_user_auth:
-        image: node_user_auth:1.00
-        container_name: node_user_auth
-        restart: unless-stopped
-        command: yarn deploy
-        build:
-            context: ./Dockerfiles/user-auth
-        ports:
-            - "8080:8080"
-        depends_on:
-            - mongo
-        networks:
-            - isolation-network
-
-    node_user_crud:
-        image: node_user_crud:1.00
-        container_name: node_user_crud
-        restart: unless-stopped
-        command: yarn deploy
-        build:
-            context: ./Dockerfiles/user-crud
-        ports:
-            - "8081:8081"
-        depends_on:
-            - mongo
-        networks:
-            - isolation-network
-
-    mongo:
-        image: mongo
-        restart: unless-stopped
-        ports:
-            - "27017:27017"
-        networks:
-            - isolation-network
-    
     # TODO: replace dev flask server
     flask_route:
         image: flask_route:1.00
@@ -61,10 +25,10 @@ services:
         restart: unless-stopped
         command: manage.py runserver --host=0.0.0.0
         build: 
-            context: ./Dockerfiles/vrp-rpc
+            context: ./Dockerfiles/route
         ports:
             - "5000:5000"
         networks:
             - isolation-network
 
-    # TODO: add crud, postgresql, geocode, depot
+    # TODO: add user, crud geocode, depot, postgresql
