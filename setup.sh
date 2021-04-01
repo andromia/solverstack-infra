@@ -11,13 +11,13 @@ mv Dockerfile .dockerignore route/
 
 # Clone Services
 cd web/
-git clone git@github.com:andromia/solverstack-web.git
+git clone git@github.com:cnpls/solverstack-web.git
 cp -r solverstack-web/* .
 rm -rf solverstack-web
 cd ..
 
 cd route/
-git clone git@github.com:andromia/solverstack-route.git
+git clone git@github.com:cnpls/solverstack-route.git
 cp -r solverstack-route/* .
 rm -rf solverstack-route
 cd ..
